@@ -27,9 +27,9 @@
         }
 
         body {
-            background: var(--color-bg);
+            background: var(--wa-color-neutral-95);
             font-family: 'Segoe UI', Roboto, sans-serif;
-            color: var(--color-text);
+            color: var(--wa-color-neutral-20);
             line-height: 1.6;
             padding-bottom: var(--spacing);
         }
@@ -40,15 +40,15 @@
         }
 
         header.wa-bar {
-            background: var(--color-primary);
-            color: #fff;
+            background: var(--wa-color-brand-60);
+            color: var(--wa-color-neutral-95);
             padding: calc(var(--spacing) * 0.75) 0;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            box-shadow: var(--wa-shadow-blur-s);
         }
 
         header .wa-bar__content h1 {
-            font-size: 1.75rem;
-            font-weight: 600;
+            font-size: var(--wa-font-size-2xl);
+            font-weight: var(--wa-font-weight-bold);
         }
 
         .wa-container {
@@ -58,9 +58,9 @@
         }
 
         .wa-card {
-            background: var(--color-card);
-            border-radius: var(--radius-base);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            background: var(--wa-color-neutral-95);
+            border-radius: var(--wa-border-radius-m);
+            box-shadow: var(--wa-shadow-m);
             padding: 0 var(--spacing);
             margin-bottom: var(--spacing);
         }
@@ -69,21 +69,21 @@
         .wa-table {
             width: 100%;
             border-collapse: collapse;
-            border-radius: var(--radius-base);
+            border-radius: var(--wa-border-radius-l);
             overflow: hidden;
-            background: var(--color-card);
+            background: var(--wa-color-neutral-95);
         }
 
         .wa-table th,
         .wa-table td {
             padding: calc(var(--spacing) * 0.75);
             text-align: left;
-            border-bottom: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--wa-color-neutral-95);
         }
 
         .wa-table thead {
-            background: var(--color-primary);
-            color: #fff;
+            background: var(--wa-color-blue-60);
+            color: var(--wa-color-gray-95);
         }
 
         .wa-table tbody tr:hover {
@@ -97,19 +97,19 @@
 
         .wa-field label {
             display: block;
-            font-weight: 500;
+            font-weight: var(--wa-font-weight-semibold);
         }
 
         .wa-input {
             width: 100%;
             max-width: 100%;
-            border-radius: var(--radius-base);
+            border-radius: var(--wa-border-radius-l);
             transition: border-color var(--transition-speed);
         }
 
         .wa-input:focus {
             outline: none;
-            border-color: var(--color-primary);
+            border-color: var(--wa-color-brand-70);
         }
 
         /* === Buttons === */
@@ -117,9 +117,9 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            border-radius: var(--radius-base);
-            font-size: 0.95rem;
-            font-weight: 500;
+            border-radius: var(--wa-border-radius-l);
+            font-size: var(--wa-font-size-m);
+            font-weight: var(--wa-font-weight-semibold);
             border: 2px solid transparent;
             cursor: pointer;
             transition: background-color var(--transition-speed), border-color var(--transition-speed), color var(--transition-speed);
@@ -130,22 +130,22 @@
         }
 
         .wa-button--accent {
-            color: #fff;
+            color: var(--wa-color-neutral-95);
         }
 
         .wa-button--accent:hover {
-            background: var(--color-primary-dark);
-            border-color: var(--color-primary-dark);
+            background: var(--wa-color-brand-70);
+            border-color: var(--wa-color-brand-70);
         }
 
         .wa-button--success {
-            color: #fff;
+            color: var(--wa-color-neutral-95);
         }
 
         .wa-button--primary {
-            background: #fff;
-            color: var(--color-primary);
-            border-color: var(--color-primary);
+            background: var(--wa-color-neutral-95);
+            color: var(--wa-color-blue-50);
+            border-color: var(--wa-color-blue-50);
         }
 
         .wa-button--primary:hover {
@@ -182,11 +182,11 @@
             }
 
             .wa-input {
-                font-size: 0.9rem;
+                font-size: var(--wa-font-size-m);
             }
 
             .wa-button {
-                font-size: 0.9rem;
+                font-size: var(--wa-font-size-m);
                 padding: 0.5rem 1rem;
             }
 
@@ -197,11 +197,12 @@
 
         wa-button.close::part(base) {
             background: unset !important;
-            color: black;
+            color: var(--wa-color-gray-05);
         }
+
         wa-button.btn-save::part(base) {
             background: unset;
-            color: var(--color-primary);
+            color: var(--wa-color-blue-60);
         }
 
         wa-option {
@@ -213,8 +214,40 @@
                 outline: unset;
             }
         }
+
         input[type='checkbox'] {
             margin-right: 5px;
+        }
+
+        #ai-answer {
+            margin-top: 1rem;
+            font-style: italic;
+            color: var(--wa-color-neutral-10);
+        }
+
+        #modal-content {
+            background: var(--wa-color-neutral-90);
+            border-radius: var(--wa-border-radius-l);
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            box-shadow: var(--wa-shadow-blur-m);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #modal-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.4);
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
         }
     </style>
 
@@ -226,6 +259,18 @@
     </div>
 </header>
 <main class="wa-container wa-margin-top--lg">
+    <div class="wa-card wa-padding--md wa-margin-bottom--md" style="max-width:600px;margin:auto;">
+        <form id="ask-ai-form" hx-boost="false">
+            <div class="wa-field">
+                <wa-input id="ai-question" name="question" label="Ask AI about features" class="wa-input"
+                          placeholder="For example: How to add login functionality?" required/>
+            </div>
+            <div class="button-group">
+                <wa-button type="submit" class="wa-button">Ask AI</wa-button>
+            </div>
+        </form>
+        <div id="ai-answer"></div>
+    </div>
     <div class="button-group" style="display: flex; gap: 1rem; justify-content: center;">
         <wa-button class="wa-button wa-button--accent"
                    appearance="filled outlined" variant="brand"
@@ -241,12 +286,10 @@
     </div>
 
     <section id="product-section" class="wa-margin-top--md"></section>
-    <div id="modal-backdrop"
-         style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.4);align-items:center;justify-content:center;z-index:9999;">
-        <div id="modal-content"
-             style="background:#fff; border-radius:8px; max-width:600px; width:100%; max-height:90vh; box-shadow:0 2px 16px rgba(0,0,0,0.2); position:relative; display:flex; flex-direction:column;">
+    <div id="modal-backdrop">
+        <div id="modal-content">
             <wa-button id='close-modal-btn' class="close"
-                    style='position:absolute;top:10px;right:10px;font-size:1.5rem;background:none;border:none;cursor:pointer;'>
+                       style='position:absolute;top:10px;right:10px;font-size:1.5rem;background:none;border:none;cursor:pointer;'>
                 &times;
             </wa-button>
             <div id="modal-body" style='padding:2rem; overflow-y:auto; max-height:80vh;'></div>
@@ -276,7 +319,7 @@
         function attachProductFormEvents() {
             let variantIndex = document.querySelectorAll('#variants-container .variant-block').length;
             let imageIndex = document.querySelectorAll('#images-container .image-block').length;
-            
+
             const addVariantBtn = document.getElementById('add-variant-btn');
             if (addVariantBtn) {
                 addVariantBtn.onclick = function () {
@@ -284,7 +327,7 @@
                     const blocks = container.querySelectorAll('.variant-block');
                     const newIndex = blocks.length;
                     const block = blocks[0].cloneNode(true);
-                    
+
                     block.querySelectorAll('wa-input, wa-select, input[type="checkbox"]').forEach(inp => {
                         let name = inp.getAttribute('name');
                         if (!name) return;
@@ -312,7 +355,7 @@
                     updateVariantLabels();
                 };
             }
-            
+
             const addImageBtn = document.getElementById('add-image-btn');
             if (addImageBtn) {
                 addImageBtn.onclick = function () {
@@ -320,7 +363,7 @@
                     const blocks = container.querySelectorAll('.image-block');
                     const newIndex = blocks.length;
                     const block = blocks[0].cloneNode(true);
-                    
+
                     block.querySelectorAll('wa-input, input[type="hidden"]').forEach(inp => {
                         let name = inp.getAttribute('name');
                         if (!name) return;
@@ -375,15 +418,15 @@
         }
     </script>
     <script>
-        document.addEventListener('submit', function(e) {
+        document.addEventListener('submit', function (e) {
             if (e.target.matches('form[hx-post="/products"]')) {
                 e.target.querySelectorAll('input[type="hidden"].wa-dynamic').forEach(el => el.remove());
 
                 const variantBlocks = document.querySelectorAll('#variants-container .variant-block');
-                
+
                 variantBlocks.forEach((block, index) => {
                     const inputs = block.querySelectorAll('wa-input, wa-select, wa-checkbox');
-                    
+
                     inputs.forEach(input => {
                         const name = input.getAttribute('name');
                         if (!name) return;
@@ -435,6 +478,30 @@
                 for (let [key, value] of formData.entries()) {
                     console.log(key, '=', value);
                 }
+            }
+        });
+    </script>
+    <script>
+        document.getElementById('ask-ai-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const waInput = document.getElementById('ai-question');
+            let question = waInput.value;
+            if (!question && waInput.shadowRoot) {
+                const input = waInput.shadowRoot.querySelector('input');
+                if (input) question = input.value;
+            }
+            const answerDiv = document.getElementById('ai-answer');
+            answerDiv.textContent = 'Asking AI...';
+            try {
+                const res = await fetch('/products/ask', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({question})
+                });
+                const data = await res.json();
+                answerDiv.textContent = data.answer;
+            } catch (err) {
+                answerDiv.textContent = 'Error asking AI.';
             }
         });
     </script>
