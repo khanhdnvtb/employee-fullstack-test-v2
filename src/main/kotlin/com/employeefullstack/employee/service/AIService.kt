@@ -1,6 +1,9 @@
 package com.employeefullstack.employee.service
 
+import com.employeefullstack.employee.dto.GeminiResponse
 import com.fasterxml.jackson.databind.ObjectMapper
+import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.core.env.Environment
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
@@ -9,12 +12,19 @@ import org.springframework.stereotype.Service
 import org.springframework.web.client.RestTemplate
 
 @Service
-class AIService(private val env: Environment) {
+class AIService(@Value("\${gemini.api-key}") private val geminiApiKey: String) {
+
+    private val logger = LoggerFactory.getLogger(AIService::class.java)
+    companion object {
+        private const val BASE_URL = "https://generativelanguage.googleapis.com/v1beta"
+        private const val MODEL_NAME = "gemini-2.0-flash"
+        private const val PROMPT_FORM = "You are a software development assistant. Please answer the following user request in detail and clearly:\n\n"
+    }
     fun askAIForProducts(question: String): String {
-        val geminiApiKey = env.getProperty("GEMINI_API_KEY") ?: ""
-        val prompt =
-            "You are a software development assistant. Please answer the following user request in detail and clearly:\n\n" + question
-        val url = "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro:generateContent?key=$geminiApiKey"
+
+        val prompt = buildPrompt(question)
+        val geminiUrl = "$BASE_URL/models/$MODEL_NAME:generateContent?key=$geminiApiKey"
+
         val headers = HttpHeaders()
         headers.contentType = MediaType.APPLICATION_JSON
         val requestBody = mapOf(
@@ -25,14 +35,19 @@ class AIService(private val env: Environment) {
         val entity = HttpEntity(requestBody, headers)
         val restTemplate = RestTemplate()
         return try {
-            val response = restTemplate.postForEntity(url, entity, String::class.java)
+            val response = restTemplate.postForEntity(geminiUrl, entity, String::class.java)
             val json = response.body ?: return "No response received from Gemini API."
-            val mapper = ObjectMapper()
-            val root = mapper.readTree(json)
-            val text = root["candidates"]?.get(0)?.get("content")?.get("parts")?.get(0)?.get("text")?.asText()
-            text ?: "No response from Gemini."
-        } catch (e: Exception) {
-            return e.message.toString();
+            val objectMapper = ObjectMapper()
+            val geminiResponse = objectMapper.readValue(json, GeminiResponse::class.java)
+            val text = geminiResponse.candidates.firstOrNull()?.content?.parts?.firstOrNull()?.text
+
+            text ?: "No response from Gemini API."
+        } catch (ex: Exception) {
+            logger.error("Error calling Gemini API", ex)
+            return "Error: ${ex.localizedMessage}"
         }
     }
+
+    private fun buildPrompt(question: String): String =
+        "$PROMPT_FORM$question"
 }
